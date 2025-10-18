@@ -1,0 +1,34 @@
+created:
+    - database/factories/RolFactory.php
+    - database/factories/RegionaleFactory.php
+    - database/factories/BicicletaFactory.php
+    - database/factories/EventoFactory.php
+    - database/factories/PrestamoFactory.php
+    - database/factories/UserFactory.php
+    - database/factories/DevolucioneFactory.php
+    - database/factories/ParticipacioneFactory.php
+    - database/migrations/2025_10_17_150221_create_rols_table.php
+    - database/migrations/2025_10_17_150222_create_regionales_table.php
+    - database/migrations/2025_10_17_150223_create_bicicletas_table.php
+    - database/migrations/2025_10_17_150224_create_eventos_table.php
+    - database/migrations/2025_10_17_150225_create_prestamos_table.php
+    - database/migrations/2025_10_17_150226_create_users_table.php
+    - database/migrations/2025_10_17_150227_create_devoluciones_table.php
+    - database/migrations/2025_10_17_150228_create_participaciones_table.php
+    - app/Models/Rol.php
+    - app/Models/Regionale.php
+    - app/Models/Bicicleta.php
+    - app/Models/Evento.php
+    - app/Models/Prestamo.php
+    - app/Models/User.php
+    - app/Models/Devolucione.php
+    - app/Models/Participacione.php
+models:
+    User: { id: increments, nombres: string, apellidos: string, email: string, password: string, estrato: 'tinyInteger unsigned', rol_id: 'integer foreign:rol.id' }
+    Rol: { id: increments, rol: string }
+    Regionale: { id: increments, regional: string, latitud: 'decimal:9,6', longitud: 'decimal:9,6' }
+    Bicicleta: { id: increments, marca: string, color: string, estado: 'enum:"Disponible","Prestada","Mantenimiento" default:"Disponible"', precioAlquiler: string, regional_id: 'integer foreign:regionales.id' }
+    Evento: { id: increments, nombre: string, fecha: date, estado: 'enum:"Disponible","Ejecucion","Finalizado" default:"Disponible"', regional_id: 'integer foreign:regionales.id' }
+    Prestamo: { id: increments, fecha_inicio: datetime, tarifa_recorrido: 'decimal:10,2', user_id: 'integer foreign:users.id', bicicleta_id: 'integer foreign:bicicletas.id' }
+    Devolucione: { id: increments, total_cobrado: 'decimal:10,2', adicional_cobrado: 'decimal:10,2 default:0', fecha: datetime, prestamo_id: 'integer foreign:prestamos.id', user_id: 'integer foreign:users.id', bicicleta_id: 'integer foreign:bicicletas.i' }
+    Participacione: { id: increments, evento_id: 'integer foreign:eventos.id', user_id: 'integer foreign:users.id' }

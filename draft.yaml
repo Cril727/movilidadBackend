@@ -1,0 +1,48 @@
+models:
+  Rol:
+    id: increments
+    rol: string
+  Regionale:
+    id: increments
+    regional: string
+    latitud:  decimal:9,6
+    longitud: decimal:9,6
+  Bicicleta:
+    id: increments
+    marca: string
+    color: string
+    estado: enum:"Disponible","Prestada","Mantenimiento" default:"Disponible"
+    precioAlquiler: string
+    regional_id: integer foreign:regionales.id
+  Evento:
+    id: increments
+    nombre: string
+    fecha: date
+    estado: enum:"Disponible","Ejecucion","Finalizado" default:"Disponible"
+    regional_id: integer foreign:regionales.id
+  Prestamo:
+    id: increments
+    fecha_inicio: datetime
+    tarifa_recorrido: decimal:10,2
+    user_id: integer foreign:users.id
+    bicicleta_id: integer foreign:bicicletas.id
+  User:
+    id: increments
+    nombres: string
+    apellidos: string
+    email: string
+    password: string
+    estrato: tinyInteger unsigned
+    rol_id: integer foreign:rol.id
+  Devolucione:
+    id: increments
+    total_cobrado: decimal:10,2
+    adicional_cobrado: decimal:10,2 default:0
+    fecha: datetime
+    prestamo_id: integer foreign:prestamos.id
+    user_id: integer foreign:users.id
+    bicicleta_id: integer foreign:bicicletas.i
+  Participacione:
+    id: increments
+    evento_id: integer foreign:eventos.id
+    user_id: integer foreign:users.id
