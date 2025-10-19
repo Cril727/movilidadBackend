@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BiciletaController;
+use App\Http\Controllers\DevolucionController;
+use App\Http\Controllers\PrestamoController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,16 +33,24 @@ Route::middleware('auth:api')->group(function () {
 
     //bicycle routes
     Route::post('/addBicycle', [BiciletaController::class, 'store']);
-    Route::get('/BicycleById/{id}', [BiciletaController::class, 'userById']);
+    Route::get('/BicycleById/{id}', [BiciletaController::class, 'bicyclesById']);
     Route::put('/updateBicycle/{id}', [BiciletaController::class, 'update']);
     Route::delete('/deleteBicycle/{id}', [BiciletaController::class, 'delete']);
     Route::get('/Bicycles', [BiciletaController::class, 'index']);
 
-    //loan rotes
-    Route::post('/addB', [BiciletaController::class, 'store']);
-    Route::get('/BicycleById/{id}', [BiciletaController::class, 'userById']);
-    Route::put('/updateBicycle/{id}', [BiciletaController::class, 'update']);
-    Route::delete('/deleteBicycle/{id}', [BiciletaController::class, 'delete']);
-    Route::get('/Bicycles', [BiciletaController::class, 'index']);
+    //loan routes
+    Route::post('/addLoan', [PrestamoController::class, 'store']);
+    Route::get('/loanById/{id}', [PrestamoController::class, 'loanById']);
+    Route::put('/updateLoan/{id}', [PrestamoController::class, 'update']);
+    Route::delete('/deleteLoan/{id}', [PrestamoController::class, 'delete']);
+    Route::get('/loans', [PrestamoController::class, 'index']);
+
+    //return routes
+    Route::post('/addReturn', [DevolucionController::class, 'store']);
+    Route::get('/returnById/{id}', [DevolucionController::class, 'userById']);
+    Route::put('/updateReturn/{id}', [DevolucionController::class, 'update']);
+    Route::delete('/deleteReturn/{id}', [DevolucionController::class, 'delete']);
+    Route::get('/returns', [DevolucionController::class, 'index']);
+
 
 });
